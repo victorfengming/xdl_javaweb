@@ -6,6 +6,7 @@ import cn.xdl.util.User29;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -19,14 +20,21 @@ import java.util.List;
  */
 public class UserDao_Oracle implements BaseUserDao {
 
+    private static final String SQL_INSERT = "insert into user29 values(seq_user29_id.nextval,?,?)";
+
     @Override
     public boolean insert(User29 u) {
         // 定义一堆儿空
         Connection conn = null;
         PreparedStatement state = null;
-        //1. 获取连接对象
-        conn = JdbcUtils.getConnection();
-        //2. 预编译执行环境
+        try {
+            //1. 获取连接对象
+            conn = JdbcUtils.getConnection();
+            //2. 预编译执行环境
+            state = conn.prepareStatement(SQL_INSERT);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         //3. 填充预编译中的参数(问号)
         //4. 执行,并根据执行时对数据库表格的影响行数,返回true
         return false;
