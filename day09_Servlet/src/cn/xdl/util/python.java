@@ -18,7 +18,6 @@ public class python {
 
     /**
      * 用于模拟python中的input函数,OK
-     *
      * @param tip
      * @return
      */
