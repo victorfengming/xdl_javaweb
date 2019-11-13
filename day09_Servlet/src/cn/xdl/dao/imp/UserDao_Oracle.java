@@ -1,6 +1,7 @@
 package cn.xdl.dao.imp;
 
 import cn.xdl.dao.BaseUserDao;
+import cn.xdl.util.JdbcUtils;
 import cn.xdl.util.User29;
 
 import java.sql.Connection;
@@ -24,7 +25,7 @@ public class UserDao_Oracle implements BaseUserDao {
         Connection conn = null;
         PreparedStatement state = null;
         //1. 获取连接对象
-//        conn =
+        conn = JdbcUtils.getConnection();
         //2. 预编译执行环境
         //3. 填充预编译中的参数(问号)
         //4. 执行,并根据执行时对数据库表格的影响行数,返回true

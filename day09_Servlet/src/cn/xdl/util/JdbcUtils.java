@@ -70,8 +70,15 @@ public class JdbcUtils {
 //        return DriverManager.getConnection(url, user, password);
 //    }
 //    这个地方,我既不想用传递参数的方式,还想要简化书写,这可咋整,我们这里使用配置文件的方式,所以要这样写
-    public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(url, user, password);
+    public static Connection getConnection(){
+        // 这里修改成了处理异常了
+        // 原来是网上面抛异常
+        try {
+            return DriverManager.getConnection(url, user, password);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /**
