@@ -23,16 +23,6 @@
     <orderEntry type="library" scope="PROVIDED" name="Tomcat 8.5.47" level="application_server_libraries" />
     <orderEntry type="library" name="xdl_javaweb" level="project" />
     <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
-    <orderEntry type="module-library" exported="">
-      <library>
-        <CLASSES>
-          <root url="file://$MODULE_DIR$/web/WEB-INF/lib" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-        <jarDirectory url="file://$MODULE_DIR$/web/WEB-INF/lib" recursive="false" />
-      </library>
-    </orderEntry>
-    <orderEntry type="library" name="lib (2)" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
   </component>
 </module>

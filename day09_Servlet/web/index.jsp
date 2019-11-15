@@ -8,9 +8,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
-    <title>$Title$</title>
+    <title>首页</title>
   </head>
   <body>
-  $END$
+  <a href='login.html'>点击登录</a><br>
+  <a href='reg.html'>点击注册</a><br>
+  <a href='update.html'>点击修改</a><br>
   </body>
 </html>

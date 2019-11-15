@@ -1,5 +1,6 @@
 package cn.xdl.servlet;
 
+
 import cn.xdl.service.UserService;
 import cn.xdl.util.User29;
 
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author victor
@@ -19,8 +21,8 @@ import java.io.IOException;
  * @created 2019-11-13 21:25
  * @function ""
  */
-@WebServlet("/reg.do")
-public class RegServlet extends HttpServlet {
+@WebServlet("/login.do")
+public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // MVC 这里是Control层,传说中的调度层,
         // 我们拿到数据不需要进行处理,传递给别人,就可以了
@@ -35,20 +37,33 @@ public class RegServlet extends HttpServlet {
         // 2. 接收密码
         String password = request.getParameter("password");
         // 3. 将账号密码传递给service
-        boolean flag = UserService.reg(new User29(username, password));
+        boolean flag = UserService.login(new User29(username, password));
         // 4. 根据service的返回值,响应不同的内容
         String resultHtml = null;
         if (flag) {
-            // 注册成功
-            resultHtml = "<h3>恭喜你,注册成功了<a href='login.html'>点击登录</a></h3>";
+            // 登录成功
+            resultHtml = html(username);
         } else {
-            // 注册失败
-            resultHtml = "<h3>(*^▽^*)嘿嘿,失败了<a href='login.html'>点击登录</a></h3>";
+            // 登录失败
+            resultHtml = "<h3>(*^▽^*)嘿嘿,登录成功了<a href='login.html'></a></h3>";
         }
         response.getWriter().append(resultHtml);
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private String html(String username) {
+        // 显示用户的所有数据
+        List<User29> data = UserService.findAll();
+        StringBuilder sb = new StringBuilder();
+        sb.append("<div><span>欢迎你,sivp用户:"+username+"</span><a href='update.html'>修改密码</a></div>");
+        sb.append("<table>");
+        sb.append("<tr><th>用户编号</th><th>用户账号</th><th>用户密码</th></tr>");
+        // 来个for遍历往里面追加
+        for (User29 u : data) {
+            sb.append("<tr><td>"+u.getId()+"</td><td>"+u.getUsername()+"</td><td>"+u.getPassword()+"</td></tr>");
+        }
+        sb.append("</table>");
+        return sb.toString();
 
     }
+
 }

@@ -27,10 +27,11 @@ public class UserDao_Oracle implements BaseUserDao {
     // 所以还是c+w->c+s+u好用
     // 这样可以节省性能
     // 要是有* 更加的可怕,他会全展开*在进行操作
-    private static final String SQL_INSERT = "INSERT INTO USER29 VALUES(SEQ_USER29_ID.NEXTVAL,?,?)";
-    private static final String SQL_UPDATE = "UPDATE USER29 SET PASSWORD=? WHERE USERNAME=?AND PASSWORD=?";
-    private static final String SQL_FIND_BY_USERNAME_AND_PASSWORD = "SELECT ID FROM USER29 WHERE USERNAME=?AND PASSWORD=?";
-    private static final String SQL_FIND_ALL = "SELECT * FROM USER29";
+    private static final String SQL_INSERT = "INSERT INTO USER28 VALUES(ID.NEXTVAL,?,?)";
+//    private static final String SQL_INSERT = "INSERT INTO USER29 VALUES(5,?,?)";
+    private static final String SQL_UPDATE = "UPDATE USER28 SET PASSWORD=? WHERE USERNAME=?AND PASSWORD=?";
+    private static final String SQL_FIND_BY_USERNAME_AND_PASSWORD = "SELECT ID FROM USER28 WHERE USERNAME=?AND PASSWORD=?";
+    private static final String SQL_FIND_ALL = "SELECT * FROM USER28";
 
     @Override
     public boolean insert(User29 u) {
@@ -45,8 +46,12 @@ public class UserDao_Oracle implements BaseUserDao {
             //3. 填充预编译中的参数(问号)
             state.setString(1,u.getUsername());
             state.setString(2,u.getPassword());
+            // System.out.println(SQL_INSERT);
+            // TODO 这里有瑕疵,序列问题
             //4. 执行,并根据执行时对数据库表格的影响行数,返回true
-            return state.executeUpdate() > 0;
+            boolean res = state.executeUpdate() > 0;
+//            System.out.println("结果是:"+res);
+            return res;
         } catch (Exception e) {
             e.printStackTrace();
         }
