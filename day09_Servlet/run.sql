@@ -15,3 +15,5 @@ create table USER28
     USERNAME VARCHAR2(32) not null,
     PASSWORD VARCHAR2(32) not null
 )
+
+
